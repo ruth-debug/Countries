@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Countries</string>
+    <string name="asc">סדר עולה</string>
+    <string name="desc">סדר יורד</string>
+    <string name="sort">סנן לפי</string>
+    <string name="name">שם מדינה</string>
+    <string name="size">גודל אוכלוסיה</string>
+    <string name="country_name">שם</string>
+    <string name="native_name">שם המדינה המקורי</string>
+</resources>

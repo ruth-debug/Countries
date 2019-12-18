@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="model.Status" />
+        <import type="android.view.View" />
+        <variable
+            name="myViewModel"
+            type="viewmodel.MainViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        tools:showIn="@layout/activity_main">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sort"
+            android:gravity="start"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/sort_ll"
+            android:id="@+id/tittle_tv"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/sort_ll">
+
+            <RadioGroup
+                android:id="@+id/radioType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/radioName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:checked="true"
+                    android:enabled="@{myViewModel.response()==Status.SUCCESS}"/>
+
+                <RadioButton
+                    android:id="@+id/radioSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/size"
+                    android:enabled="@{myViewModel.response()==Status.SUCCESS}"/>
+
+            </RadioGroup>
+            <RadioGroup
+                android:id="@+id/radioSort"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+
+                <RadioButton
+                    android:id="@+id/radioAsc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/asc"
+                    android:checked="true"
+                    android:enabled="@{myViewModel.response()==Status.SUCCESS}"/>
+
+                <RadioButton
+                    android:id="@+id/radioDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/desc"
+                    android:enabled="@{myViewModel.response()==Status.SUCCESS}"/>
+
+            </RadioGroup>
+        </LinearLayout>
+         <include layout="@layout/header_view"
+             android:layout_width="match_parent"
+             android:layout_height="40dp"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             android:id="@+id/header"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/viewCountries"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:padding="4dp"
+
+            app:layout_constraintBottom_toTopOf="@id/tittle_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header"/>
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleLargeInverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="@{myViewModel.response()==Status.LOADING?View.VISIBLE:View.GONE}"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
