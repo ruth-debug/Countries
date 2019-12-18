@@ -112,9 +112,9 @@ public class MainViewModel extends AndroidViewModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(sub-> responseLiveData.set(Status.LOADING))
                 .subscribeOn(Schedulers.computation())
-                .filter(userModel ->{
+                .filter(model ->{
                     for (String border:country.getBorders()) {
-                        if (userModel.getName().toUpperCase().startsWith(border.toUpperCase()))
+                        if (model.getAlpha3Code().toUpperCase().startsWith(border.toUpperCase()))
                             return true;
                     }
                    return false;
